@@ -1,16 +1,55 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useRef } from "react";
+import Navbar from "@/components/Navbar";
+import HeroLeadForm from "@/components/HeroLeadForm";
+import UrgencyBanner from "@/components/UrgencyBanner";
+import PlanListing from "@/components/PlanListing";
+import PlanComparison from "@/components/PlanComparison";
+import UniqueValueSection from "@/components/UniqueValueSection";
+import TrustSection from "@/components/TrustSection";
+import Footer from "@/components/Footer";
+import StickyCTA from "@/components/StickyCTA";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import LeadPopup from "@/components/LeadPopup";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const [showPlans, setShowPlans] = useState(false);
+  const [compareIds, setCompareIds] = useState<number[]>([]);
+  const plansRef = useRef<HTMLDivElement>(null);
+
+  const handleFormSubmit = () => {
+    setShowPlans(true);
+    setTimeout(() => plansRef.current?.scrollIntoView({ behavior: "smooth" }), 100);
+  };
+
+  const scrollToForm = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <HeroLeadForm onSubmit={handleFormSubmit} />
+      <UrgencyBanner />
+
+      {showPlans && (
+        <div ref={plansRef}>
+          <PlanListing onCompare={setCompareIds} />
+        </div>
+      )}
+
+      {compareIds.length >= 2 && (
+        <PlanComparison planIds={compareIds} onClose={() => setCompareIds([])} />
+      )}
+
+      <UniqueValueSection />
+      <TrustSection />
+      <Footer />
+
+      <StickyCTA onClick={scrollToForm} />
+      <WhatsAppButton />
+      <LeadPopup />
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
