@@ -10,6 +10,11 @@ import Footer from "@/components/Footer";
 import StickyCTA from "@/components/StickyCTA";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import LeadPopup from "@/components/LeadPopup";
+import HealthInsuranceCalculator from "@/components/HealthInsuranceCalculator";
+import SavingsCalculator from "@/components/SavingsCalculator";
+import InstantPremiumEstimator from "@/components/InstantPremiumEstimator";
+import LiveActivityNotification from "@/components/LiveActivityNotification";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 const Index = () => {
   const [showPlans, setShowPlans] = useState(false);
@@ -41,6 +46,9 @@ const Index = () => {
         <PlanComparison planIds={compareIds} onClose={() => setCompareIds([])} />
       )}
 
+      <HealthInsuranceCalculator />
+      <InstantPremiumEstimator />
+      <SavingsCalculator />
       <UniqueValueSection />
       <TrustSection />
       <Footer />
@@ -48,6 +56,8 @@ const Index = () => {
       <StickyCTA onClick={scrollToForm} />
       <WhatsAppButton />
       <LeadPopup />
+      <LiveActivityNotification />
+      <ExitIntentPopup />
     </div>
   );
 };
