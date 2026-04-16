@@ -1,28 +1,60 @@
 import { useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
+
+const insuranceTypes = [
+  "Health Insurance",
+  "Life Insurance",
+  "Car Insurance",
+  "Bike Insurance",
+  "Travel Insurance",
+  "Home Insurance",
+  "Business Insurance",
+  "Family Floater",
+];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="bg-card border-b border-border sticky top-0 z-50">
+    <nav className="bg-card/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 gradient-primary rounded-lg flex items-center justify-center">
+          <div className="w-9 h-9 gradient-primary rounded-xl flex items-center justify-center">
             <span className="text-primary-foreground font-extrabold text-sm">L</span>
           </div>
-          <span className="font-extrabold text-xl text-foreground">Livlong</span>
+          <div>
+            <span className="font-extrabold text-xl text-foreground leading-none">Livlong</span>
+            <span className="hidden md:block text-[10px] text-muted-foreground leading-none -mt-0.5">Insurance Broker</span>
+          </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-foreground">
-          <a href="#" className="hover:text-primary transition-colors">Health Insurance</a>
-          <a href="#" className="hover:text-primary transition-colors">Life Insurance</a>
-          <a href="#" className="hover:text-primary transition-colors">OPD Plans</a>
+        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-foreground">
+          <div className="relative group">
+            <button className="flex items-center gap-1 hover:text-primary transition-colors py-4">
+              Insurance <ChevronDown className="w-3.5 h-3.5" />
+            </button>
+            <div className="absolute top-full left-0 bg-card rounded-xl shadow-card-hover border border-border p-3 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 -translate-y-1 group-hover:translate-y-0">
+              {insuranceTypes.map((type) => (
+                <a
+                  key={type}
+                  href="#"
+                  className="block px-3 py-2 rounded-lg text-sm hover:bg-muted transition-colors"
+                >
+                  {type}
+                </a>
+              ))}
+            </div>
+          </div>
           <a href="#" className="hover:text-primary transition-colors">Claims</a>
+          <a href="#" className="hover:text-primary transition-colors">Renewals</a>
+          <a href="#" className="hover:text-primary transition-colors">Support</a>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <a href="tel:1800-123-4567" className="flex items-center gap-2 text-sm font-medium text-primary">
+          <a
+            href="tel:1800-123-4567"
+            className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+          >
             <Phone className="w-4 h-4" /> 1800-123-4567
           </a>
           <button className="gradient-highlight text-highlight-foreground font-bold px-5 py-2.5 rounded-xl text-sm hover:opacity-90 transition-opacity">
@@ -36,12 +68,21 @@ const Navbar = () => {
       </div>
 
       {open && (
-        <div className="md:hidden bg-card border-t border-border px-4 pb-4 space-y-3">
-          <a href="#" className="block py-2 text-foreground font-medium">Health Insurance</a>
-          <a href="#" className="block py-2 text-foreground font-medium">Life Insurance</a>
-          <a href="#" className="block py-2 text-foreground font-medium">OPD Plans</a>
-          <a href="#" className="block py-2 text-foreground font-medium">Claims</a>
-          <button className="w-full gradient-highlight text-highlight-foreground font-bold py-3 rounded-xl">
+        <div className="md:hidden bg-card border-t border-border px-4 pb-4 space-y-1 max-h-[70vh] overflow-y-auto">
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider pt-3 pb-1 px-3">
+            Insurance Products
+          </p>
+          {insuranceTypes.map((type) => (
+            <a key={type} href="#" className="block py-2.5 px-3 text-foreground font-medium rounded-lg hover:bg-muted">
+              {type}
+            </a>
+          ))}
+          <div className="border-t border-border pt-3 mt-2 space-y-2">
+            <a href="#" className="block py-2 px-3 text-foreground font-medium">Claims</a>
+            <a href="#" className="block py-2 px-3 text-foreground font-medium">Renewals</a>
+            <a href="#" className="block py-2 px-3 text-foreground font-medium">Support</a>
+          </div>
+          <button className="w-full gradient-highlight text-highlight-foreground font-bold py-3 rounded-xl mt-2">
             Get Free Quote
           </button>
         </div>

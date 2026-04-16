@@ -2,17 +2,20 @@ import { useState, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import HeroLeadForm from "@/components/HeroLeadForm";
 import UrgencyBanner from "@/components/UrgencyBanner";
+import InsuranceCategories from "@/components/InsuranceCategories";
+import PartnersSection from "@/components/PartnersSection";
+import HowItWorks from "@/components/HowItWorks";
 import PlanListing from "@/components/PlanListing";
 import PlanComparison from "@/components/PlanComparison";
 import UniqueValueSection from "@/components/UniqueValueSection";
 import TrustSection from "@/components/TrustSection";
+import HealthInsuranceCalculator from "@/components/HealthInsuranceCalculator";
+import SavingsCalculator from "@/components/SavingsCalculator";
+import InstantPremiumEstimator from "@/components/InstantPremiumEstimator";
 import Footer from "@/components/Footer";
 import StickyCTA from "@/components/StickyCTA";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import LeadPopup from "@/components/LeadPopup";
-import HealthInsuranceCalculator from "@/components/HealthInsuranceCalculator";
-import SavingsCalculator from "@/components/SavingsCalculator";
-import InstantPremiumEstimator from "@/components/InstantPremiumEstimator";
 import LiveActivityNotification from "@/components/LiveActivityNotification";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 
@@ -34,6 +37,9 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroLeadForm onSubmit={handleFormSubmit} />
+      <PartnersSection />
+      <InsuranceCategories />
+      <HowItWorks />
       <UrgencyBanner />
 
       {showPlans && (
@@ -46,10 +52,10 @@ const Index = () => {
         <PlanComparison planIds={compareIds} onClose={() => setCompareIds([])} />
       )}
 
+      <UniqueValueSection />
       <HealthInsuranceCalculator />
       <InstantPremiumEstimator />
       <SavingsCalculator />
-      <UniqueValueSection />
       <TrustSection />
       <Footer />
 
