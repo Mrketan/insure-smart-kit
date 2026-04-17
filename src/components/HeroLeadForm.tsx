@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Shield, Heart, Users, ChevronRight, HeartPulse, Car, Plane, Award } from "lucide-react";
+import heroFamily from "@/assets/hero-family.jpg";
 
 interface Props {
   onSubmit: (data: { age: string; gender: string; mobile: string }) => void;
