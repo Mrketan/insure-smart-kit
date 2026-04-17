@@ -22,6 +22,7 @@ import ExitIntentPopup from "@/components/ExitIntentPopup";
 const Index = () => {
   const [showPlans, setShowPlans] = useState(false);
   const [compareIds, setCompareIds] = useState<number[]>([]);
+  const [showComparison, setShowComparison] = useState(false);
   const plansRef = useRef<HTMLDivElement>(null);
 
   const handleFormSubmit = () => {
@@ -31,6 +32,22 @@ const Index = () => {
 
   const scrollToForm = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleCompareChange = (ids: number[]) => {
+    setCompareIds(ids);
+    if (ids.length < 2) setShowComparison(false);
+  };
+
+  const handleCompareOpen = (ids: number[]) => {
+    setCompareIds(ids);
+    setShowComparison(true);
+  };
+
+  const handleRemoveFromComparison = (id: number) => {
+    const next = compareIds.filter((i) => i !== id);
+    setCompareIds(next);
+    if (next.length < 2) setShowComparison(false);
   };
 
   return (
@@ -44,12 +61,20 @@ const Index = () => {
 
       {showPlans && (
         <div ref={plansRef}>
-          <PlanListing onCompare={setCompareIds} />
+          <PlanListing
+            compareIds={compareIds}
+            onCompareChange={handleCompareChange}
+            onCompareOpen={handleCompareOpen}
+          />
         </div>
       )}
 
-      {compareIds.length >= 2 && (
-        <PlanComparison planIds={compareIds} onClose={() => setCompareIds([])} />
+      {showComparison && compareIds.length >= 2 && (
+        <PlanComparison
+          planIds={compareIds}
+          onClose={() => setShowComparison(false)}
+          onRemove={handleRemoveFromComparison}
+        />
       )}
 
       <UniqueValueSection />
