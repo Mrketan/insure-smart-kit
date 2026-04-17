@@ -33,6 +33,18 @@ const HeroLeadForm = ({ onSubmit }: Props) => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-highlight/20 blur-3xl" />
       </div>
 
+      {/* Background family image - decorative right side */}
+      <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block opacity-25 pointer-events-none">
+        <img
+          src={heroFamily}
+          alt=""
+          className="w-full h-full object-cover object-left"
+          width={1024}
+          height={1024}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/40 to-transparent" />
+      </div>
+
       <div className="relative max-w-7xl mx-auto px-4 py-12 md:py-20">
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* Left - Value Prop */}
