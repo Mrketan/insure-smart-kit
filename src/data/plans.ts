@@ -1,9 +1,19 @@
+import starHealth from "@/assets/partners/star-health.png";
+import hdfcErgo from "@/assets/partners/hdfc-ergo.png";
+import iciciLombard from "@/assets/partners/icici-lombard.png";
+import nivaBupa from "@/assets/partners/niva-bupa.png";
+import careHealth from "@/assets/partners/care-health.png";
+import bajajAllianz from "@/assets/partners/bajaj-allianz.png";
+import tataAig from "@/assets/partners/tata-aig.png";
+import maxBupa from "@/assets/partners/max-bupa.png";
+
 export interface Plan {
   id: number;
   name: string;
   insurer: string;
+  insurerLogo: string;
   price: number;
-  coverageAmount: number; // numeric for comparison
+  coverageAmount: number;
   coverage: string;
   benefits: string[];
   badge?: "Best Value" | "Cheapest" | "Recommended" | "Most Popular";
@@ -17,11 +27,23 @@ export interface Plan {
   claimRatio: string;
 }
 
+export const partnerLogos = {
+  starHealth,
+  hdfcErgo,
+  iciciLombard,
+  nivaBupa,
+  careHealth,
+  bajajAllianz,
+  tataAig,
+  maxBupa,
+};
+
 export const plans: Plan[] = [
   {
     id: 1,
     name: "Health Protect Gold",
     insurer: "Star Health",
+    insurerLogo: starHealth,
     price: 599,
     coverageAmount: 1000000,
     coverage: "₹10 Lakh",
@@ -45,6 +67,7 @@ export const plans: Plan[] = [
     id: 2,
     name: "Optima Secure",
     insurer: "HDFC Ergo",
+    insurerLogo: hdfcErgo,
     price: 449,
     coverageAmount: 500000,
     coverage: "₹5 Lakh",
@@ -68,6 +91,7 @@ export const plans: Plan[] = [
     id: 3,
     name: "Health Companion",
     insurer: "ICICI Lombard",
+    insurerLogo: iciciLombard,
     price: 799,
     coverageAmount: 2500000,
     coverage: "₹25 Lakh",
@@ -91,6 +115,7 @@ export const plans: Plan[] = [
     id: 4,
     name: "Arogya Sanjeevani",
     insurer: "Niva Bupa",
+    insurerLogo: nivaBupa,
     price: 349,
     coverageAmount: 300000,
     coverage: "₹3 Lakh",
@@ -113,6 +138,7 @@ export const plans: Plan[] = [
     id: 5,
     name: "Super Top-Up Plan",
     insurer: "Care Health",
+    insurerLogo: careHealth,
     price: 299,
     coverageAmount: 5000000,
     coverage: "₹50 Lakh",
