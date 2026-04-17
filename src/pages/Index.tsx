@@ -78,6 +78,7 @@ const Index = () => {
         />
       )}
 
+      <DynamicComparisonShowcase />
       <UniqueValueSection />
       <HealthInsuranceCalculator />
       <InstantPremiumEstimator />
