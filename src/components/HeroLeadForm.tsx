@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Shield, Heart, Users, ChevronRight, HeartPulse, Car, Plane, Award } from "lucide-react";
+import heroFamily from "@/assets/hero-family.jpg";
 
 interface Props {
   onSubmit: (data: { age: string; gender: string; mobile: string }) => void;
@@ -30,6 +31,18 @@ const HeroLeadForm = ({ onSubmit }: Props) => {
         <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-accent blur-3xl" />
         <div className="absolute bottom-10 right-10 w-96 h-96 rounded-full bg-primary-foreground blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-highlight/20 blur-3xl" />
+      </div>
+
+      {/* Background family image - decorative right side */}
+      <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block opacity-25 pointer-events-none">
+        <img
+          src={heroFamily}
+          alt=""
+          className="w-full h-full object-cover object-left"
+          width={1024}
+          height={1024}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/40 to-transparent" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 py-12 md:py-20">
