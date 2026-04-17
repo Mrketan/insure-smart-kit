@@ -9,6 +9,10 @@ import {
   Baby,
   Bike,
 } from "lucide-react";
+import healthImg from "@/assets/health-insurance.jpg";
+import lifeImg from "@/assets/life-insurance.jpg";
+import carImg from "@/assets/car-insurance.jpg";
+import travelImg from "@/assets/travel-insurance.jpg";
 
 const categories = [
   {
@@ -18,6 +22,7 @@ const categories = [
     color: "from-[hsl(191,100%,17%)] to-[hsl(191,80%,30%)]",
     plans: "120+ Plans",
     startPrice: "₹299/mo",
+    image: healthImg,
   },
   {
     icon: Shield,
@@ -26,6 +31,7 @@ const categories = [
     color: "from-[hsl(250,60%,50%)] to-[hsl(270,55%,55%)]",
     plans: "80+ Plans",
     startPrice: "₹199/mo",
+    image: lifeImg,
   },
   {
     icon: Car,
@@ -34,14 +40,7 @@ const categories = [
     color: "from-[hsl(35,95%,50%)] to-[hsl(25,90%,55%)]",
     plans: "50+ Plans",
     startPrice: "₹2,499/yr",
-  },
-  {
-    icon: Bike,
-    title: "Bike Insurance",
-    desc: "Ride safe with the best coverage",
-    color: "from-[hsl(340,70%,50%)] to-[hsl(350,65%,55%)]",
-    plans: "40+ Plans",
-    startPrice: "₹999/yr",
+    image: carImg,
   },
   {
     icon: Plane,
@@ -50,6 +49,15 @@ const categories = [
     color: "from-[hsl(160,60%,40%)] to-[hsl(170,55%,48%)]",
     plans: "30+ Plans",
     startPrice: "₹149/trip",
+    image: travelImg,
+  },
+  {
+    icon: Bike,
+    title: "Bike Insurance",
+    desc: "Ride safe with the best coverage",
+    color: "from-[hsl(340,70%,50%)] to-[hsl(350,65%,55%)]",
+    plans: "40+ Plans",
+    startPrice: "₹999/yr",
   },
   {
     icon: Home,
@@ -105,16 +113,30 @@ const InsuranceCategories = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.06 }}
-            className="group bg-card rounded-2xl p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all duration-300 cursor-pointer hover:-translate-y-1 relative overflow-hidden"
+            className="group bg-card rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 cursor-pointer hover:-translate-y-1 relative overflow-hidden flex flex-col"
           >
-            {/* Gradient accent top bar */}
-            <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${cat.color}`} />
+            {/* Image header (or gradient fallback) */}
+            {cat.image ? (
+              <div className="relative h-32 md:h-36 overflow-hidden bg-muted">
+                <img
+                  src={cat.image}
+                  alt={cat.title}
+                  loading="lazy"
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className={`absolute top-3 left-3 w-10 h-10 rounded-xl bg-gradient-to-br ${cat.color} flex items-center justify-center shadow-lg`}>
+                  <cat.icon className="w-5 h-5 text-primary-foreground" />
+                </div>
+              </div>
+            ) : (
+              <div className={`h-32 md:h-36 bg-gradient-to-br ${cat.color} flex items-center justify-center relative`}>
+                <cat.icon className="w-14 h-14 text-primary-foreground/90" />
+              </div>
+            )}
 
-            <div
-              className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cat.color} flex items-center justify-center mb-4`}
-            >
-              <cat.icon className="w-6 h-6 text-primary-foreground" />
-            </div>
+            <div className="p-5 flex flex-col flex-1">
 
             <h3 className="font-bold text-foreground text-sm md:text-base mb-1">
               {cat.title}
@@ -123,7 +145,7 @@ const InsuranceCategories = () => (
               {cat.desc}
             </p>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mt-auto">
               <span className="text-xs font-semibold text-primary">
                 {cat.plans}
               </span>
@@ -135,6 +157,7 @@ const InsuranceCategories = () => (
             <button className="w-full mt-4 py-2.5 rounded-xl border-2 border-primary/20 text-primary text-xs font-bold hover:bg-primary hover:text-primary-foreground transition-all duration-200 group-hover:border-primary">
               Get Quotes →
             </button>
+            </div>
           </motion.div>
         ))}
       </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
+import livlongLogo from "@/assets/livlong-logo.png";
 
 const insuranceTypes = [
   "Health Insurance",
@@ -18,15 +19,15 @@ const Navbar = () => {
   return (
     <nav className="bg-card/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-        <div className="flex items-center gap-2">
-          <div className="w-9 h-9 gradient-primary rounded-xl flex items-center justify-center">
-            <span className="text-primary-foreground font-extrabold text-sm">L</span>
-          </div>
-          <div>
-            <span className="font-extrabold text-xl text-foreground leading-none">Livlong</span>
-            <span className="hidden md:block text-[10px] text-muted-foreground leading-none -mt-0.5">Insurance Broker</span>
-          </div>
-        </div>
+        <a href="/" className="flex items-center gap-2">
+          <img
+            src={livlongLogo}
+            alt="Livlong Insurance"
+            className="h-9 md:h-10 w-auto"
+            width={160}
+            height={40}
+          />
+        </a>
 
         <div className="hidden md:flex items-center gap-6 text-sm font-medium text-foreground">
           <div className="relative group">
