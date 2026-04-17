@@ -1,34 +1,22 @@
 import { motion } from "framer-motion";
+import starHealth from "@/assets/partners/star-health.png";
+import hdfcErgo from "@/assets/partners/hdfc-ergo.png";
+import iciciLombard from "@/assets/partners/icici-lombard.png";
+import nivaBupa from "@/assets/partners/niva-bupa.png";
+import careHealth from "@/assets/partners/care-health.png";
+import bajajAllianz from "@/assets/partners/bajaj-allianz.png";
+import tataAig from "@/assets/partners/tata-aig.png";
+import maxBupa from "@/assets/partners/max-bupa.png";
 
 const partners = [
-  { name: "Star Health", short: "STAR" },
-  { name: "HDFC Ergo", short: "HDFC" },
-  { name: "ICICI Lombard", short: "ICICI" },
-  { name: "Niva Bupa", short: "NIVA" },
-  { name: "Care Health", short: "CARE" },
-  { name: "Bajaj Allianz", short: "BAJAJ" },
-  { name: "Tata AIG", short: "TATA" },
-  { name: "Max Bupa", short: "MAX" },
-  { name: "New India", short: "NIA" },
-  { name: "Reliance", short: "RGI" },
-  { name: "SBI General", short: "SBI" },
-  { name: "Kotak Life", short: "KOTAK" },
-];
-
-// Distinct brand-style colors for visual variety (HSL via inline style for partner branding only)
-const palette = [
-  "hsl(355, 78%, 45%)", // Star red
-  "hsl(220, 75%, 35%)", // HDFC blue
-  "hsl(25, 95%, 50%)",  // ICICI orange
-  "hsl(195, 80%, 40%)", // Niva teal
-  "hsl(145, 60%, 35%)", // Care green
-  "hsl(220, 90%, 45%)", // Bajaj blue
-  "hsl(215, 70%, 25%)", // Tata navy
-  "hsl(280, 55%, 45%)", // Max purple
-  "hsl(0, 75%, 45%)",   // NIA red
-  "hsl(210, 80%, 40%)", // Reliance blue
-  "hsl(220, 85%, 30%)", // SBI deep blue
-  "hsl(5, 80%, 50%)",   // Kotak red-orange
+  { name: "Star Health", logo: starHealth },
+  { name: "HDFC Ergo", logo: hdfcErgo },
+  { name: "ICICI Lombard", logo: iciciLombard },
+  { name: "Niva Bupa", logo: nivaBupa },
+  { name: "Care Health", logo: careHealth },
+  { name: "Bajaj Allianz", logo: bajajAllianz },
+  { name: "Tata AIG", logo: tataAig },
+  { name: "Max Bupa", logo: maxBupa },
 ];
 
 const PartnersSection = () => (
@@ -51,25 +39,24 @@ const PartnersSection = () => (
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 md:gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-8 gap-3 md:gap-4">
         {partners.map((p, i) => (
           <motion.div
             key={p.name}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.04 }}
-            className="bg-card rounded-xl py-4 px-3 flex flex-col items-center justify-center gap-2 shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 cursor-pointer min-h-[88px]"
+            transition={{ delay: i * 0.05 }}
+            className="bg-card rounded-xl p-3 md:p-4 flex items-center justify-center shadow-card hover:shadow-card-hover transition-all hover:-translate-y-0.5 cursor-pointer min-h-[90px] grayscale hover:grayscale-0"
           >
-            <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center text-primary-foreground font-extrabold text-[10px] tracking-tight shadow-sm"
-              style={{ backgroundColor: palette[i % palette.length] }}
-            >
-              {p.short}
-            </div>
-            <span className="text-[10px] md:text-xs font-semibold text-foreground/70 text-center leading-tight">
-              {p.name}
-            </span>
+            <img
+              src={p.logo}
+              alt={p.name}
+              loading="lazy"
+              width={120}
+              height={60}
+              className="max-h-14 w-auto object-contain"
+            />
           </motion.div>
         ))}
       </div>
