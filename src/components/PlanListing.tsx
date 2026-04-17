@@ -1,86 +1,63 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Star, TrendingUp, Zap, Filter } from "lucide-react";
-
-interface Plan {
-  id: number;
-  name: string;
-  insurer: string;
-  price: number;
-  coverage: string;
-  benefits: string[];
-  badge?: string;
-  rating: number;
-  bought: number;
-}
-
-const plans: Plan[] = [
-  {
-    id: 1, name: "Health Protect Gold", insurer: "Star Health", price: 599,
-    coverage: "₹10 Lakh", benefits: ["Cashless at 10,000+ hospitals", "No room rent limit", "Free health checkup", "OPD cover included"],
-    badge: "Best Value", rating: 4.8, bought: 47,
-  },
-  {
-    id: 2, name: "Optima Secure", insurer: "HDFC Ergo", price: 449,
-    coverage: "₹5 Lakh", benefits: ["Cashless at 8,000+ hospitals", "Day 1 coverage", "Maternity benefit", "Restore benefit"],
-    badge: "Cheapest", rating: 4.6, bought: 32,
-  },
-  {
-    id: 3, name: "Health Companion", insurer: "ICICI Lombard", price: 799,
-    coverage: "₹25 Lakh", benefits: ["Unlimited restore", "Global coverage", "Personal health coach", "Doctor + OPD bundle"],
-    badge: "Recommended", rating: 4.9, bought: 58,
-  },
-  {
-    id: 4, name: "Arogya Sanjeevani", insurer: "Niva Bupa", price: 349,
-    coverage: "₹3 Lakh", benefits: ["Standard IRDAI plan", "Cashless available", "Cataract coverage", "Ambulance cover"],
-    rating: 4.3, bought: 19,
-  },
-  {
-    id: 5, name: "Super Top-Up Plan", insurer: "Care Health", price: 299,
-    coverage: "₹50 Lakh", benefits: ["Top-up on existing plan", "Very low premium", "No sub-limits", "Tax benefit u/s 80D"],
-    rating: 4.5, bought: 25,
-  },
-];
+import { Check, Star, TrendingUp, Zap, Filter, X } from "lucide-react";
+import { plans, type Plan } from "@/data/plans";
 
 const familyTypes = ["Self", "Self + Spouse", "Family", "Parents"];
 const coverageOptions = ["₹3 Lakh", "₹5 Lakh", "₹10 Lakh", "₹25 Lakh", "₹50 Lakh"];
 
 interface Props {
-  onCompare: (ids: number[]) => void;
+  compareIds: number[];
+  onCompareChange: (ids: number[]) => void;
+  onCompareOpen: (ids: number[]) => void;
 }
 
-const PlanListing = ({ onCompare }: Props) => {
+const PlanListing = ({ compareIds, onCompareChange, onCompareOpen }: Props) => {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
   const [familyType, setFamilyType] = useState("Self");
   const [coverageFilter, setCoverageFilter] = useState("");
-  const [compareIds, setCompareIds] = useState<number[]>([]);
   const [showFilters, setShowFilters] = useState(false);
 
   const filtered = plans.filter(
-    (p) => p.price >= priceRange[0] && p.price <= priceRange[1] &&
+    (p) =>
+      p.price >= priceRange[0] &&
+      p.price <= priceRange[1] &&
       (!coverageFilter || p.coverage === coverageFilter)
   );
 
   const toggleCompare = (id: number) => {
-    setCompareIds((prev) =>
-      prev.includes(id) ? prev.filter((i) => i !== id) : prev.length < 3 ? [...prev, id] : prev
-    );
+    const next = compareIds.includes(id)
+      ? compareIds.filter((i) => i !== id)
+      : compareIds.length < 3
+      ? [...compareIds, id]
+      : compareIds;
+    onCompareChange(next);
   };
 
-  const badgeColor = (badge?: string) => {
+  const removeCompare = (id: number) =>
+    onCompareChange(compareIds.filter((i) => i !== id));
+
+  const badgeColor = (badge?: Plan["badge"]) => {
     if (badge === "Best Value") return "bg-primary text-primary-foreground";
     if (badge === "Cheapest") return "bg-highlight text-highlight-foreground";
     if (badge === "Recommended") return "bg-urgency text-primary-foreground";
+    if (badge === "Most Popular") return "bg-accent text-accent-foreground";
     return "";
   };
+
+  const selectedPlans = plans.filter((p) => compareIds.includes(p.id));
 
   return (
     <section id="plans" className="py-12 md:py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground">Top Health Plans for You</h2>
-            <p className="text-muted-foreground mt-1">{filtered.length} plans match your profile</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              Top Health Plans for You
+            </h2>
+            <p className="text-muted-foreground mt-1">
+              {filtered.length} plans match your profile
+            </p>
           </div>
           <button
             onClick={() => setShowFilters(!showFilters)}
@@ -101,7 +78,9 @@ const PlanListing = ({ onCompare }: Props) => {
                     key={f}
                     onClick={() => setFamilyType(f)}
                     className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all ${
-                      familyType === f ? "bg-primary text-primary-foreground font-medium" : "text-foreground hover:bg-muted"
+                      familyType === f
+                        ? "bg-primary text-primary-foreground font-medium"
+                        : "text-foreground hover:bg-muted"
                     }`}
                   >
                     {f}
@@ -118,7 +97,9 @@ const PlanListing = ({ onCompare }: Props) => {
                     key={c}
                     onClick={() => setCoverageFilter(coverageFilter === c ? "" : c)}
                     className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all ${
-                      coverageFilter === c ? "bg-primary text-primary-foreground font-medium" : "text-foreground hover:bg-muted"
+                      coverageFilter === c
+                        ? "bg-primary text-primary-foreground font-medium"
+                        : "text-foreground hover:bg-muted"
                     }`}
                   >
                     {c}
@@ -147,85 +128,134 @@ const PlanListing = ({ onCompare }: Props) => {
           {/* Plan cards */}
           <div className="space-y-4">
             <AnimatePresence>
-              {filtered.map((plan, i) => (
-                <motion.div
-                  key={plan.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                  className="bg-card rounded-2xl p-5 md:p-6 shadow-card hover:shadow-card-hover transition-shadow relative"
-                >
-                  {plan.badge && (
-                    <span className={`absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full ${badgeColor(plan.badge)}`}>
-                      {plan.badge}
-                    </span>
-                  )}
+              {filtered.map((plan, i) => {
+                const isComparing = compareIds.includes(plan.id);
+                return (
+                  <motion.div
+                    key={plan.id}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className={`bg-card rounded-2xl p-5 md:p-6 shadow-card hover:shadow-card-hover transition-all relative ${
+                      isComparing ? "ring-2 ring-primary" : ""
+                    }`}
+                  >
+                    {plan.badge && (
+                      <span
+                        className={`absolute top-4 right-4 text-xs font-bold px-3 py-1 rounded-full ${badgeColor(
+                          plan.badge
+                        )}`}
+                      >
+                        {plan.badge}
+                      </span>
+                    )}
 
-                  <div className="flex flex-col md:flex-row md:items-center gap-4">
-                    <div className="flex-1">
-                      <h3 className="font-bold text-lg text-foreground">{plan.name}</h3>
-                      <p className="text-sm text-muted-foreground">{plan.insurer}</p>
-                      <div className="flex items-center gap-1 mt-1">
-                        <Star className="w-4 h-4 fill-urgency text-urgency" />
-                        <span className="text-sm font-medium">{plan.rating}</span>
-                        <span className="text-xs text-muted-foreground ml-2">
-                          <TrendingUp className="w-3 h-3 inline" /> {plan.bought} bought today
-                        </span>
+                    <div className="flex flex-col md:flex-row md:items-center gap-4">
+                      <div className="flex-1">
+                        <h3 className="font-bold text-lg text-foreground">{plan.name}</h3>
+                        <p className="text-sm text-muted-foreground">{plan.insurer}</p>
+                        <div className="flex items-center gap-1 mt-1">
+                          <Star className="w-4 h-4 fill-urgency text-urgency" />
+                          <span className="text-sm font-medium">{plan.rating}</span>
+                          <span className="text-xs text-muted-foreground ml-2">
+                            <TrendingUp className="w-3 h-3 inline" /> {plan.bought} bought today
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-center md:text-right">
+                        <div className="text-2xl font-extrabold text-foreground">
+                          ₹{plan.price}
+                          <span className="text-sm font-normal text-muted-foreground">/mo</span>
+                        </div>
+                        <div className="text-sm text-primary font-semibold">
+                          {plan.coverage} cover
+                        </div>
                       </div>
                     </div>
 
-                    <div className="text-center md:text-right">
-                      <div className="text-2xl font-extrabold text-foreground">₹{plan.price}<span className="text-sm font-normal text-muted-foreground">/mo</span></div>
-                      <div className="text-sm text-primary font-semibold">{plan.coverage} cover</div>
+                    <div className="grid grid-cols-2 gap-2 mt-4">
+                      {plan.benefits.map((b) => (
+                        <div key={b} className="flex items-start gap-2 text-sm text-foreground">
+                          <Check className="w-4 h-4 text-highlight mt-0.5 shrink-0" />
+                          {b}
+                        </div>
+                      ))}
                     </div>
-                  </div>
 
-                  <div className="grid grid-cols-2 gap-2 mt-4">
-                    {plan.benefits.map((b) => (
-                      <div key={b} className="flex items-start gap-2 text-sm text-foreground">
-                        <Check className="w-4 h-4 text-highlight mt-0.5 shrink-0" />
-                        {b}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-3 mt-5">
-                    <button className="flex-1 gradient-highlight text-highlight-foreground font-bold py-3 rounded-xl hover:opacity-90 transition-opacity">
-                      Select Plan
-                    </button>
-                    <button
-                      onClick={() => toggleCompare(plan.id)}
-                      className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
-                        compareIds.includes(plan.id)
-                          ? "border-primary bg-primary/10 text-primary"
-                          : "border-input text-muted-foreground hover:border-primary"
-                      }`}
-                    >
-                      {compareIds.includes(plan.id) ? "✓ Added" : "Compare"}
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
+                    <div className="flex items-center gap-3 mt-5">
+                      <button className="flex-1 gradient-highlight text-highlight-foreground font-bold py-3 rounded-xl hover:opacity-90 transition-opacity">
+                        Select Plan
+                      </button>
+                      <button
+                        onClick={() => toggleCompare(plan.id)}
+                        disabled={!isComparing && compareIds.length >= 3}
+                        className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
+                          isComparing
+                            ? "border-primary bg-primary/10 text-primary"
+                            : "border-input text-muted-foreground hover:border-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                        }`}
+                      >
+                        {isComparing ? "✓ Added" : "+ Compare"}
+                      </button>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </AnimatePresence>
-
-            {compareIds.length >= 2 && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="sticky bottom-20 z-30"
-              >
-                <button
-                  onClick={() => onCompare(compareIds)}
-                  className="w-full gradient-primary text-primary-foreground font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg"
-                >
-                  <Zap className="w-5 h-5" /> Compare {compareIds.length} Plans
-                </button>
-              </motion.div>
-            )}
           </div>
         </div>
       </div>
+
+      {/* Floating Compare Bar */}
+      <AnimatePresence>
+        {compareIds.length > 0 && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-3xl"
+          >
+            <div className="bg-card border border-primary/20 rounded-2xl shadow-card-hover p-3 md:p-4 flex items-center gap-3">
+              <div className="flex-1 flex items-center gap-2 overflow-x-auto">
+                {selectedPlans.map((p) => (
+                  <div
+                    key={p.id}
+                    className="flex items-center gap-2 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs md:text-sm font-semibold whitespace-nowrap"
+                  >
+                    <span className="max-w-[100px] md:max-w-none truncate">{p.name}</span>
+                    <button
+                      onClick={() => removeCompare(p.id)}
+                      className="hover:bg-primary/20 rounded p-0.5"
+                      aria-label="Remove from comparison"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ))}
+                {Array.from({ length: 3 - compareIds.length }).map((_, i) => (
+                  <div
+                    key={`empty-${i}`}
+                    className="hidden md:flex items-center gap-2 border border-dashed border-muted-foreground/30 text-muted-foreground/60 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap"
+                  >
+                    + Add plan
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={() => onCompareOpen(compareIds)}
+                disabled={compareIds.length < 2}
+                className="gradient-primary text-primary-foreground font-bold px-4 md:px-6 py-3 rounded-xl flex items-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed text-sm whitespace-nowrap"
+              >
+                <Zap className="w-4 h-4" />
+                Compare {compareIds.length >= 2 ? `(${compareIds.length})` : ""}
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
