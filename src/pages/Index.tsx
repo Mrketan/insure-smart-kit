@@ -7,6 +7,7 @@ import PartnersSection from "@/components/PartnersSection";
 import HowItWorks from "@/components/HowItWorks";
 import PlanListing from "@/components/PlanListing";
 import PlanComparison from "@/components/PlanComparison";
+import DynamicComparisonShowcase from "@/components/DynamicComparisonShowcase";
 import UniqueValueSection from "@/components/UniqueValueSection";
 import TrustSection from "@/components/TrustSection";
 import HealthInsuranceCalculator from "@/components/HealthInsuranceCalculator";
