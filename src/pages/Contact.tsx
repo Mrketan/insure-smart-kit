@@ -73,6 +73,49 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Office locations */}
+      <section className="pb-16 max-w-6xl mx-auto px-4">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-foreground text-center mb-3">Visit us in person</h2>
+        <p className="text-muted-foreground text-center mb-10">Walk into any of our branches — no appointment needed.</p>
+        <div className="grid md:grid-cols-3 gap-5">
+          {[
+            { c: "Mumbai (HQ)", a: "12th Floor, Trade Tower, BKC", p: "+91 22 4567 8900", h: "Mon–Sat, 9am–7pm" },
+            { c: "Bangalore", a: "5th Floor, Prestige Sigma, MG Road", p: "+91 80 4234 5678", h: "Mon–Sat, 9am–7pm" },
+            { c: "Delhi NCR", a: "Tower B, DLF Cyber City, Gurugram", p: "+91 124 678 9012", h: "Mon–Sat, 9am–7pm" },
+          ].map((o) => (
+            <div key={o.c} className="bg-card border border-border rounded-2xl p-6">
+              <div className="flex items-center gap-2 mb-3">
+                <MapPin className="w-5 h-5 text-accent" />
+                <div className="font-bold text-foreground">{o.c}</div>
+              </div>
+              <p className="text-sm text-muted-foreground mb-3">{o.a}</p>
+              <div className="text-sm text-foreground"><strong>Phone:</strong> {o.p}</div>
+              <div className="text-xs text-muted-foreground mt-1">{o.h}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="pb-16 bg-secondary">
+        <div className="max-w-3xl mx-auto px-4 pt-14">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-foreground text-center mb-8">Common questions</h2>
+          <div className="space-y-3">
+            {[
+              { q: "How quickly will I get a response?", a: "Most enquiries are answered within 30 minutes during business hours. Outside business hours, expect a reply by the next working day." },
+              { q: "Is the consultation really free?", a: "Yes. Our advisors are paid by Livlong, never by commissions on plans we recommend. You pay nothing for advice — ever." },
+              { q: "Can I get help with an existing claim?", a: "Absolutely. Even if you didn't buy through Livlong, we offer free claim guidance. Call our helpline and our team will assist." },
+              { q: "Do you serve customers outside metros?", a: "Yes — we cover 1,500+ cities across India with phone, email and WhatsApp support in 8 languages." },
+            ].map((f) => (
+              <details key={f.q} className="bg-card border border-border rounded-xl p-5 group">
+                <summary className="font-semibold text-foreground cursor-pointer list-none flex justify-between items-center">{f.q}<span className="text-primary group-open:rotate-45 transition-transform text-2xl">+</span></summary>
+                <p className="text-sm text-muted-foreground mt-3">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
