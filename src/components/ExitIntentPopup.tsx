@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Gift, ChevronRight } from "lucide-react";
+import { leadStore } from "@/lib/leadStore";
 
 const ExitIntentPopup = () => {
   const [show, setShow] = useState(false);
@@ -77,6 +78,7 @@ const ExitIntentPopup = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                if (phone) leadStore.add({ mobile: phone, product: "Health Insurance", source: "exit_intent", notes: "Exit intent: 10% off claimed" });
                 setSubmitted(true);
                 setShow(false);
               }}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Shield, Heart, Users, ChevronRight, HeartPulse, Car, Plane, Award } from "lucide-react";
 import heroFamily from "@/assets/hero-family.jpg";
+import { leadStore } from "@/lib/leadStore";
 
 interface Props {
   onSubmit: (data: { age: string; gender: string; mobile: string }) => void;
@@ -21,7 +22,10 @@ const HeroLeadForm = ({ onSubmit }: Props) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (age && gender && mobile) onSubmit({ age, gender, mobile });
+    if (age && gender && mobile) {
+      leadStore.add({ age, gender, mobile, product: "Health Insurance", source: "hero_form" });
+      onSubmit({ age, gender, mobile });
+    }
   };
 
   return (

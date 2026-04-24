@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import livlongLogo from "@/assets/livlong-logo.png";
 
 const Footer = () => (
@@ -17,7 +18,7 @@ const Footer = () => (
         <div>
           <h4 className="font-bold text-primary-foreground mb-4">Products</h4>
           <div className="space-y-2 text-sm text-primary-foreground/70">
-            <a href="#" className="block hover:text-primary-foreground">Health Insurance</a>
+            <Link to="/health-insurance" className="block hover:text-primary-foreground">Health Insurance</Link>
             <a href="#" className="block hover:text-primary-foreground">Life Insurance</a>
             <a href="#" className="block hover:text-primary-foreground">OPD Plans</a>
             <a href="#" className="block hover:text-primary-foreground">Family Plans</a>
@@ -26,9 +27,9 @@ const Footer = () => (
         <div>
           <h4 className="font-bold text-primary-foreground mb-4">Company</h4>
           <div className="space-y-2 text-sm text-primary-foreground/70">
-            <a href="#" className="block hover:text-primary-foreground">About Us</a>
+            <Link to="/about" className="block hover:text-primary-foreground">About Us</Link>
             <a href="#" className="block hover:text-primary-foreground">Careers</a>
-            <a href="#" className="block hover:text-primary-foreground">Blog</a>
+            <Link to="/blog" className="block hover:text-primary-foreground">Blog</Link>
             <a href="#" className="block hover:text-primary-foreground">Press</a>
           </div>
         </div>
@@ -37,7 +38,7 @@ const Footer = () => (
           <div className="space-y-2 text-sm text-primary-foreground/70">
             <a href="#" className="block hover:text-primary-foreground">Help Center</a>
             <a href="#" className="block hover:text-primary-foreground">File a Claim</a>
-            <a href="#" className="block hover:text-primary-foreground">Contact Us</a>
+            <Link to="/contact" className="block hover:text-primary-foreground">Contact Us</Link>
             <a href="#" className="block hover:text-primary-foreground">FAQ</a>
           </div>
         </div>
@@ -47,6 +48,7 @@ const Footer = () => (
             <a href="#" className="block hover:text-primary-foreground">Privacy Policy</a>
             <a href="#" className="block hover:text-primary-foreground">Terms of Service</a>
             <a href="#" className="block hover:text-primary-foreground">IRDAI License</a>
+            <Link to="/admin" className="block hover:text-primary-foreground opacity-60">Admin</Link>
           </div>
         </div>
       </div>
