@@ -88,6 +88,94 @@ const HealthInsurance = () => (
       </div>
     </section>
 
+    {/* Plan types */}
+    <section className="py-16 max-w-6xl mx-auto px-4">
+      <div className="text-center mb-10">
+        <span className="text-xs font-bold text-accent tracking-wider">CHOOSE YOUR PLAN TYPE</span>
+        <h2 className="text-3xl font-extrabold text-foreground mt-2 mb-3">Plans built around your life stage</h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto">Whether you're single, just married, raising kids, or caring for parents — there's a Livlong plan tailored for you.</p>
+      </div>
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {[
+          { t: "Individual", d: "Solo cover for working professionals", price: "₹4,200/yr", cover: "₹5L cover", color: "bg-primary/10 text-primary" },
+          { t: "Family Floater", d: "One plan for your entire family", price: "₹9,800/yr", cover: "₹10L cover", color: "bg-accent/10 text-accent" },
+          { t: "Senior Citizen", d: "Tailored for parents above 60", price: "₹14,500/yr", cover: "₹7L cover", color: "bg-highlight/10 text-highlight" },
+          { t: "Critical Illness", d: "Lump sum on diagnosis of 30+ diseases", price: "₹3,600/yr", cover: "₹25L cover", color: "bg-destructive/10 text-destructive" },
+        ].map((p) => (
+          <div key={p.t} className="bg-card border border-border rounded-2xl p-6 hover:shadow-card-hover transition-shadow">
+            <span className={`text-xs font-bold px-2.5 py-1 rounded-md ${p.color}`}>{p.t.toUpperCase()}</span>
+            <h3 className="font-bold text-foreground mt-3 mb-1">{p.t} Plan</h3>
+            <p className="text-sm text-muted-foreground mb-4">{p.d}</p>
+            <div className="text-2xl font-extrabold text-foreground">{p.price}</div>
+            <div className="text-xs text-muted-foreground mb-4">{p.cover}</div>
+            <Link to="/" className="text-sm font-bold text-primary hover:underline inline-flex items-center gap-1">Compare plans <ArrowRight className="w-3.5 h-3.5" /></Link>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* How claims work */}
+    <section className="py-16 bg-secondary">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-extrabold text-foreground mb-3">Claim in 4 simple steps</h2>
+          <p className="text-muted-foreground">Most cashless approvals happen in under 30 minutes.</p>
+        </div>
+        <div className="grid md:grid-cols-4 gap-5">
+          {[
+            { n: "01", icon: PhoneCall, t: "Call our helpline", d: "Reach our 24x7 claims desk on 1800-123-4567" },
+            { n: "02", icon: Hospital, t: "Visit network hospital", d: "Show your e-card at any of 10,000+ hospitals" },
+            { n: "03", icon: FileText, t: "Submit documents", d: "We coordinate paperwork directly with the hospital" },
+            { n: "04", icon: Check, t: "Cashless approval", d: "Get pre-authorisation in 30 minutes, focus on recovery" },
+          ].map((s) => (
+            <div key={s.n} className="bg-card border border-border rounded-2xl p-6 relative">
+              <div className="text-5xl font-extrabold text-primary/10 absolute top-4 right-4">{s.n}</div>
+              <div className="w-11 h-11 gradient-highlight rounded-xl flex items-center justify-center mb-3"><s.icon className="w-5 h-5 text-highlight-foreground" /></div>
+              <h3 className="font-bold text-foreground mb-1">{s.t}</h3>
+              <p className="text-sm text-muted-foreground">{s.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Trust stats */}
+    <section className="py-14 bg-card border-y border-border">
+      <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        {[
+          { icon: Users, n: "2Cr+", l: "Happy customers" },
+          { icon: Hospital, n: "10,000+", l: "Network hospitals" },
+          { icon: IndianRupee, n: "₹5,000Cr+", l: "Claims settled" },
+          { icon: Clock, n: "30 min", l: "Avg cashless approval" },
+        ].map((s) => (
+          <div key={s.l}>
+            <s.icon className="w-7 h-7 text-accent mx-auto mb-2" />
+            <div className="text-2xl md:text-3xl font-extrabold text-foreground">{s.n}</div>
+            <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    {/* Testimonials */}
+    <section className="py-16 max-w-6xl mx-auto px-4">
+      <h2 className="text-3xl font-extrabold text-foreground text-center mb-10">What our customers say</h2>
+      <div className="grid md:grid-cols-3 gap-5">
+        {[
+          { n: "Rohan M.", c: "Mumbai", q: "Got my mother's bypass surgery cleared cashless in 25 minutes. Livlong's claim manager handled everything.", r: 5 },
+          { n: "Priya S.", c: "Bangalore", q: "Compared 8 plans in 5 minutes and saved ₹6,400 vs my old policy. The OPD bundle is a game-changer.", r: 5 },
+          { n: "Anand K.", c: "Delhi", q: "Renewed my parents' senior plan online — no medicals, no calls, no upselling. Refreshingly simple.", r: 5 },
+        ].map((t) => (
+          <div key={t.n} className="bg-card border border-border rounded-2xl p-6">
+            <div className="flex gap-0.5 mb-3">{[...Array(t.r)].map((_, i) => <Star key={i} className="w-4 h-4 fill-highlight text-highlight" />)}</div>
+            <p className="text-sm text-foreground mb-4 italic">"{t.q}"</p>
+            <div className="text-sm font-bold text-foreground">{t.n}</div>
+            <div className="text-xs text-muted-foreground">{t.c}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
     <Footer />
   </div>
 );
