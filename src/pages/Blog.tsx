@@ -63,7 +63,52 @@ const Blog = () => (
         ))}
       </div>
 
-      <div className="text-center mt-12">
+      {/* Categories */}
+      <div className="mt-16 mb-12">
+        <h2 className="text-2xl font-extrabold text-foreground text-center mb-3">Browse by category</h2>
+        <p className="text-muted-foreground text-center mb-8">Find expert guidance for the cover that matters to you.</p>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          {[
+            { t: "Health", c: "32 articles" },
+            { t: "Life", c: "21 articles" },
+            { t: "Motor", c: "18 articles" },
+            { t: "Travel", c: "14 articles" },
+            { t: "Tax & Savings", c: "12 articles" },
+          ].map((c) => (
+            <button key={c.t} className="bg-card border border-border rounded-xl p-4 text-center hover:border-primary hover:shadow-card transition-all">
+              <div className="font-bold text-foreground">{c.t}</div>
+              <div className="text-xs text-muted-foreground mt-1">{c.c}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Newsletter */}
+      <div className="bg-secondary rounded-2xl p-8 md:p-10 text-center mb-12">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-foreground mb-3">Get insurance tips in your inbox</h2>
+        <p className="text-muted-foreground mb-6 max-w-xl mx-auto">Join 50,000+ readers getting bite-sized weekly advice on health, life and money — no spam, ever.</p>
+        <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
+          <input type="email" placeholder="your@email.com" className="flex-1 px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary" />
+          <button className="gradient-highlight text-highlight-foreground font-bold px-6 py-3 rounded-xl hover:opacity-90">Subscribe</button>
+        </form>
+        <p className="text-xs text-muted-foreground mt-3">By subscribing you agree to our Privacy Policy.</p>
+      </div>
+
+      {/* Editorial promise */}
+      <div className="grid md:grid-cols-3 gap-5 mb-12">
+        {[
+          { t: "Written by experts", d: "Every article is reviewed by IRDAI-certified advisors and qualified medical professionals." },
+          { t: "Updated regularly", d: "We refresh content every quarter to reflect the latest IRDAI rules and tax law changes." },
+          { t: "Reader-funded, never paid", d: "We never accept payments from insurers to feature plans. Recommendations are unbiased." },
+        ].map((p) => (
+          <div key={p.t} className="bg-card border border-border rounded-2xl p-6">
+            <div className="font-bold text-foreground mb-2">{p.t}</div>
+            <p className="text-sm text-muted-foreground">{p.d}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center">
         <Link to="/" className="inline-block gradient-highlight text-highlight-foreground font-bold px-7 py-3 rounded-xl">Get a Free Quote</Link>
       </div>
     </section>
