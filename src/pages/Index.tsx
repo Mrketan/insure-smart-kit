@@ -19,6 +19,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import LeadPopup from "@/components/LeadPopup";
 import LiveActivityNotification from "@/components/LiveActivityNotification";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
+import SEO from "@/components/SEO";
 
 const Index = () => {
   const [showPlans, setShowPlans] = useState(false);
@@ -53,6 +54,17 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Livlong — Compare Health, Life, Car & Travel Insurance Online"
+        description="India's #1 insurance comparison platform. Compare 500+ plans from 50+ insurers. Save up to 25%. IRDAI licensed broker. Free expert advice."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "InsuranceAgency",
+          name: "Livlong Insurance",
+          areaServed: "IN",
+          aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", reviewCount: "152340" },
+        }}
+      />
       <Navbar />
       <HeroLeadForm onSubmit={handleFormSubmit} />
       <PartnersSection />

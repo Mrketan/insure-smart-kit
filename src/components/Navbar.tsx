@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav className="bg-card/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-        <a href="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <img
             src={livlongLogo}
             alt="Livlong Insurance"
@@ -28,7 +28,7 @@ const Navbar = () => {
             width={160}
             height={40}
           />
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-6 text-sm font-medium text-foreground">
           <div className="relative group">
@@ -36,7 +36,8 @@ const Navbar = () => {
               Insurance <ChevronDown className="w-3.5 h-3.5" />
             </button>
             <div className="absolute top-full left-0 bg-card rounded-xl shadow-card-hover border border-border p-3 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 -translate-y-1 group-hover:translate-y-0">
-              {insuranceTypes.map((type) => (
+              <Link to="/health-insurance" className="block px-3 py-2 rounded-lg text-sm hover:bg-muted transition-colors">Health Insurance</Link>
+              {insuranceTypes.slice(1).map((type) => (
                 <a
                   key={type}
                   href="#"
@@ -47,9 +48,9 @@ const Navbar = () => {
               ))}
             </div>
           </div>
-          <a href="#" className="hover:text-primary transition-colors">Claims</a>
-          <a href="#" className="hover:text-primary transition-colors">Renewals</a>
-          <a href="#" className="hover:text-primary transition-colors">Support</a>
+          <Link to="/blog" className="hover:text-primary transition-colors">Blog</Link>
+          <Link to="/about" className="hover:text-primary transition-colors">About</Link>
+          <Link to="/contact" className="hover:text-primary transition-colors">Contact</Link>
         </div>
 
         <div className="hidden md:flex items-center gap-3">
@@ -74,15 +75,16 @@ const Navbar = () => {
           <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider pt-3 pb-1 px-3">
             Insurance Products
           </p>
-          {insuranceTypes.map((type) => (
+          <Link to="/health-insurance" className="block py-2.5 px-3 text-foreground font-medium rounded-lg hover:bg-muted">Health Insurance</Link>
+          {insuranceTypes.slice(1).map((type) => (
             <a key={type} href="#" className="block py-2.5 px-3 text-foreground font-medium rounded-lg hover:bg-muted">
               {type}
             </a>
           ))}
-          <div className="border-t border-border pt-3 mt-2 space-y-2">
-            <a href="#" className="block py-2 px-3 text-foreground font-medium">Claims</a>
-            <a href="#" className="block py-2 px-3 text-foreground font-medium">Renewals</a>
-            <a href="#" className="block py-2 px-3 text-foreground font-medium">Support</a>
+          <div className="border-t border-border pt-3 mt-2 space-y-1">
+            <Link to="/blog" className="block py-2 px-3 text-foreground font-medium">Blog</Link>
+            <Link to="/about" className="block py-2 px-3 text-foreground font-medium">About</Link>
+            <Link to="/contact" className="block py-2 px-3 text-foreground font-medium">Contact</Link>
           </div>
           <button className="w-full gradient-highlight text-highlight-foreground font-bold py-3 rounded-xl mt-2">
             Get Free Quote

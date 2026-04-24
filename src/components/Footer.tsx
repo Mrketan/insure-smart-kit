@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import livlongLogo from "@/assets/livlong-logo.png";
 
 const Footer = () => (
