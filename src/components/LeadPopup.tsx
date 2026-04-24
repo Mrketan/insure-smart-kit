@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Phone } from "lucide-react";
+import { leadStore } from "@/lib/leadStore";
 
 const LeadPopup = () => {
   const [show, setShow] = useState(false);
@@ -44,6 +45,7 @@ const LeadPopup = () => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                if (phone) leadStore.add({ mobile: phone, product: "Health Insurance", source: "popup" });
                 setSubmitted(true);
                 setShow(false);
               }}
