@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Check, Heart, ShieldCheck, Stethoscope, Hospital, Pill, Baby, Activity, ArrowRight } from "lucide-react";
+import { Check, Heart, ShieldCheck, Stethoscope, Hospital, Pill, Baby, Activity, ArrowRight, Star, Users, Clock, IndianRupee, FileText, PhoneCall } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
